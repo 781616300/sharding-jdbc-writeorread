@@ -1,0 +1,31 @@
+sharding:
+  jdbc:
+    datasource:
+      # 数据源
+      names: ds0,ds1,ds2
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://59.110.213.162:3339/shard0
+        username: root
+        password: 123456
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://59.110.213.162:3340/shard0
+        username: root
+        password: 123456
+      ds2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://59.110.213.162:3341/shard0
+        username: root
+        password: 123456
+    config:
+      masterslave:
+        load-balance-algorithm-type: round_robin
+        name: dataSource
+        master-data-source-name: ds0
+        slave-data-source-names: ds1,ds2
+      props:
+        sql.show: true
